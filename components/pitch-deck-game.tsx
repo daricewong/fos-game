@@ -187,7 +187,8 @@ export function PitchDeckGameComponent() {
       {!isGameStarted ? (
         <Card className="mb-4 mx-auto">
           <CardHeader>
-            <CardTitle>Enter Player Names</CardTitle>
+            <CardTitle>Fluff or Stuff Game</CardTitle>
+            <CardDescription>Enter Player Names to Start the Game!</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handlePlayerNamesSubmit} className="mb-4">
