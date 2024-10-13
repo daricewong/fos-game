@@ -119,10 +119,7 @@ export function PitchDeckGameComponent() {
     setRemainingCards(generateDeck())
     setTimer(60)
     setIsTimerRunning(false)
-    // Loop to reset the game for each player
-    for (let i = 0; i < numPlayers; i++) {
-      setCurrentPlayerIndex(i);
-    }
+    setCurrentPlayerIndex(0); // Reset to the first player
   }
 
   const renderPitch = () => {
