@@ -351,19 +351,19 @@ export function PitchDeckGameComponent() {
                 </select>
               </label>
               {Array.from({ length: numPlayers }).map((_, index) => (
-                <div key={index} className="mb-2">
-                  <label>
+                <div key={index} className="mb-2 flex items-center"> {/* Added flex for alignment */}
+                  <label className="w-1/3"> {/* Set a width for the label */}
                     Player {index + 1} Name:
-                    <input
-                      type="text"
-                      id={`player-${index}`}
-                      className="ml-2 border rounded p-1 w-full" // Make input full width
-                      required
-                    />
                   </label>
+                  <input
+                    type="text"
+                    id={`player-${index}`}
+                    className="ml-2 border rounded p-1 w-full" // Make input full width
+                    required
+                  />
                 </div>
               ))}
-              <Button type="submit" className="w-full">Start Game</Button> {/* Full width button */}
+              <Button type="submit" className="w-full mt-4">Start Game</Button> {/* Full width button with margin-top */}
             </form>
           </CardContent>
         </Card>
