@@ -221,7 +221,6 @@ export function PitchDeckGameComponent() {
   const [numPlayers, setNumPlayers] = useState<number>(4); // Default to 4
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0); // Track current player
-  const [showRules, setShowRules] = useState<boolean>(true); // State to toggle rules visibility
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -317,7 +316,7 @@ export function PitchDeckGameComponent() {
   // Function to go to the next player
   const nextPlayer = () => {
     // Increment the current player index
-    setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % playerNames.length);
+    setCurrentPlayerIndex((currentPlayerIndex) => (currentPlayerIndex + 1) % playerNames.length);
 
     // Reset the cards being drawn for the next player
     setHand([]);
@@ -325,36 +324,13 @@ export function PitchDeckGameComponent() {
     // Update the UI to reflect the next player's name
     const currentPlayerElement = document.querySelector('.current-player-name');
     if (currentPlayerElement) {
-        currentPlayerElement.textContent = playerNames[(currentPlayerIndex + 1) % playerNames.length];
+        currentPlayerElement.textContent = playerNames[currentPlayerIndex];
     }
-  }
-
-  const handleStartGame = () => {
-    setShowRules(false); // Hide rules when starting the game
   }
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      {showRules ? (
-        <Card className="mb-4 mx-auto">
-          <CardHeader>
-            <CardTitle>Game Rules</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ol className="list-decimal pl-5">
-              <li>Play this game with 4-6 friends</li>
-              <li>Key in the number of players and input everyone's name</li>
-              <li>Start the game!</li>
-              <li>The first player draws 5 cards - 1 Theme Card, 1 Prompt Card, and 3 Content Cards.</li>
-              <li>The player has 1 minute to do a mini pitch based on the cards they have.</li>
-              <li>Once the time is up, they can pass it to the next player and the game repeats from step 4 to step 5.</li>
-            </ol>
-          </CardContent>
-          <CardFooter>
-            <Button onClick={handleStartGame} className="w-full">Enter Game</Button>
-          </CardFooter>
-        </Card>
-      ) : !isGameStarted ? (
+      {!isGameStarted ? (
         <Card className="mb-4 mx-auto">
           <CardHeader>
             <CardTitle>Fluff or Stuff Game</CardTitle>
