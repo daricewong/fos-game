@@ -221,6 +221,7 @@ export function PitchDeckGameComponent() {
   const [numPlayers, setNumPlayers] = useState<number>(4); // Default to 4
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0); // Track current player
+  const [showRules, setShowRules] = useState<boolean>(true); // State to toggle rules visibility
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -328,9 +329,32 @@ export function PitchDeckGameComponent() {
     }
   }
 
+  const handleStartGame = () => {
+    setShowRules(false); // Hide rules when starting the game
+  }
+
   return (
     <div className="max-w-4xl mx-auto p-4">
-      {!isGameStarted ? (
+      {showRules ? (
+        <Card className="mb-4 mx-auto">
+          <CardHeader>
+            <CardTitle>Game Rules</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ol className="list-decimal pl-5">
+              <li>Play this game with 4-6 friends</li>
+              <li>Key in the number of players and input everyone's name</li>
+              <li>Start the game!</li>
+              <li>The first player draws 5 cards - 1 Theme Card, 1 Prompt Card, and 3 Content Cards.</li>
+              <li>The player has 1 minute to do a mini pitch based on the cards they have.</li>
+              <li>Once the time is up, they can pass it to the next player and the game repeats from step 4 to step 5.</li>
+            </ol>
+          </CardContent>
+          <CardFooter>
+            <Button onClick={handleStartGame} className="w-full">Enter Game</Button>
+          </CardFooter>
+        </Card>
+      ) : (
         <Card className="mb-4 mx-auto">
           <CardHeader>
             <CardTitle>Fluff or Stuff Game</CardTitle>
@@ -351,77 +375,21 @@ export function PitchDeckGameComponent() {
                 </select>
               </label>
               {Array.from({ length: numPlayers }).map((_, index) => (
-                <div key={index} className="mb-2 flex items-center"> {/* Added flex for alignment */}
-                  <label className="w-1/3"> {/* Set a width for the label */}
+                <div key={index} className="mb-2 flex items-center">
+                  <label className="w-1/3">
                     Player {index + 1} Name:
                   </label>
                   <input
                     type="text"
                     id={`player-${index}`}
-                    className="ml-2 border rounded p-1 w-full" // Make input full width
+                    className="ml-2 border rounded p-1 w-full"
                     required
                   />
                 </div>
               ))}
-              <Button type="submit" className="w-full mt-4">Start Game</Button> {/* Full width button with margin-top */}
+              <Button type="submit" className="w-full mt-4">Start Game</Button>
             </form>
           </CardContent>
-        </Card>
-      ) : (
-        <Card className="mb-4">
-          <CardHeader>
-            <CardTitle>Fluff or Stuff Game</CardTitle>
-            <CardDescription>Draw cards to create your winning presentation!</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-4">
-              <h3 className="font-bold">Current Player: {playerNames[currentPlayerIndex]}</h3>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"> {/* Responsive grid */}
-              {hand.map((card, index) => (
-                <Card key={index} className={`${getCardColor(card.type)} border-2`}>
-                  <CardHeader>
-                    <CardTitle className="text-sm">{card.type}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{card.content}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-            <div className="bg-muted p-4 rounded-lg mb-4">
-              <h3 className="font-bold mb-2">Your Pitch:</h3>
-              <p>{renderPitch()}</p>
-            </div>
-            <div className="flex items-center justify-between bg-primary/10 p-4 rounded-lg">
-              <div className="text-2xl font-bold">
-                {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
-              </div>
-              <div>
-                <Button onClick={toggleTimer} className="mr-2">
-                  {isTimerRunning ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                </Button>
-                <Button onClick={resetTimer} variant="outline">
-                  <RotateCcw className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col sm:flex-row justify-between"> {/* Responsive footer */}
-            <Button onClick={drawCard} disabled={isHandComplete() || remainingCards.length === 0} className="mb-2 sm:mb-0 sm:w-auto w-full">
-              Draw Card
-            </Button>
-            <Button onClick={resetGame} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full">
-              <Shuffle className="mr-2 h-4 w-4" />
-              Reset Game
-            </Button>
-            <Button onClick={nextPlayer} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full">
-              Next Player
-            </Button>
-            <Button onClick={goBackToSetup} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full">
-              Go Back
-            </Button>
-          </CardFooter>
         </Card>
       )}
     </div>
