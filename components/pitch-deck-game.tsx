@@ -105,6 +105,74 @@ const generateDeck = (): GameCard[] => {
     "Flipped Classroom", "Personalized Learning", "Competency-Based Education", "Project-Based Learning", "Experiential Learning",
     "Service Learning", "Community Engagement", "Volunteerism", "Civic Engagement", "Social Responsibility",
     "Sustainability", "Environmental Sustainability", "Social Sustainability", "Economic Sustainability", "Cultural Sustainability",
+    "Art", "Design", "Music", "Dance", "Theater", "Film", "Photography",
+    "Literature", "Philosophy", "Psychology", "Sociology", "Anthropology", "Economics",
+    "Biology", "Chemistry", "Physics", "Mathematics", "Computer Science", "Engineering",
+    "Astronomy", "Geology", "Meteorology", "Oceanography", "Environmental Science",
+    "Social Media", "Cybersecurity", "Data Science", "Machine Learning", "Artificial Intelligence",
+    "Robotics", "Internet of Things", "Virtual Reality", "Augmented Reality", "Blockchain",
+    "Cryptocurrency", "Fintech", "Healthtech", "Edtech", "Gaming", "Esports",
+    "Virtual Events", "Remote Work", "Digital Marketing", "E-commerce", "Supply Chain",
+    "Logistics", "Manufacturing", "Agriculture", "Energy", "Renewable Energy",
+    "Sustainability", "Climate Change", "Conservation", "Wildlife", "Ecotourism",
+    "Culinary Arts", "Food Technology", "Nutrition", "Wellness", "Fitness", "Mental Health",
+    "Self Improvement", "Personal Development", "Spirituality", "Philanthropy", "Volunteerism",
+    "Social Impact", "Non-profit", "NGO", "Community Development", "Urban Planning",
+    "Architecture", "Design", "Innovation", "Creativity", "Entrepreneurship", "Startups",
+    "Cloud Computing", "5G Networks", "Quantum Computing", "Biotechnology", "Nanotechnology",
+    "Space Exploration", "Electric Vehicles", "Autonomous Cars", "Smart Homes", "Smart Cities",
+    "Virtual Assistants", "Chatbots", "Customer Service", "HR Management", "Financial Analysis",
+    "Marketing Automation", "Sales Enablement", "Customer Experience", "User Experience", "User Interface",
+    "Web Development", "Mobile Apps", "Game Development", "Artificial General Intelligence",
+    "Neural Networks", "Deep Learning", "Natural Language Processing", "Computer Vision", "Robotics Engineering",
+    "Materials Science", "Environmental Engineering", "Aerospace Engineering", "Biomedical Engineering",
+    "Civil Engineering", "Electrical Engineering", "Mechanical Engineering", "Software Engineering",
+    "Data Analytics", "Business Intelligence", "Predictive Analytics", "Prescriptive Analytics", "Descriptive Analytics",
+    "Digital Transformation", "IT Consulting", "Cybersecurity Consulting", "Cloud Migration", "DevOps",
+    "Agile Methodologies", "Scrum", "Kanban", "Lean", "Six Sigma", "Total Quality Management",
+    "Project Management", "Product Management", "Service Management", "Supply Chain Management", "Risk Management",
+    "Compliance", "Regulatory Affairs", "Audit", "Taxation", "Financial Planning", "Wealth Management",
+    "Investment Banking", "Venture Capital", "Private Equity", "Hedge Funds", "Asset Management",
+    "Real Estate Investing", "Property Management", "Construction Management", "Architecture", "Interior Design",
+    "Landscape Architecture", "Urban Planning", "Transportation Planning", "Environmental Planning", "Regional Planning",
+    "Economic Development", "Community Development", "Social Entrepreneurship", "Impact Investing", "Social Impact",
+    "Non-profit Management", "NGO Management", "Volunteer Management", "Fundraising", "Grant Writing",
+    "Event Planning", "Conference Management", "Meeting Planning", "Exhibition Management", "Trade Show Management",
+    "Digital Marketing", "SEO", "PPC", "Social Media Marketing", "Content Marketing", "Email Marketing",
+    "Influencer Marketing", "Affiliate Marketing", "Video Marketing", "Podcast Marketing", "Audio Marketing",
+    "Print Marketing", "Outdoor Advertising", "Event Marketing", "Experiential Marketing", "Sponsorship Activation",
+    "Public Relations", "Crisis Communications", "Reputation Management", "Media Relations", "Speechwriting",
+    "Content Creation", "Copywriting", "Editing", "Proofreading", "Translation", "Interpretation",
+    "Graphic Design", "Visual Design", "UI Design", "UX Design", "Web Design", "Mobile Design",
+    "Product Design", "Industrial Design", "Interior Design", "Fashion Design", "Textile Design",
+    "Architecture", "Landscape Architecture", "Urban Planning", "Interior Architecture", "Naval Architecture",
+    "Aerospace Engineering", "Biomedical Engineering", "Chemical Engineering", "Civil Engineering", "Computer Engineering",
+    "Electrical Engineering", "Environmental Engineering", "Industrial Engineering", "Materials Science", "Mechanical Engineering",
+    "Nuclear Engineering", "Software Engineering", "Systems Engineering", "Telecommunications Engineering", "Textile Engineering",
+    "Biotechnology", "Genetic Engineering", "Microbiology", "Molecular Biology", "Neuroscience", "Pharmacology",
+    "Physiology", "Virology", "Zoology", "Ecology", "Environmental Science", "Geology", "Meteorology",
+    "Oceanography", "Paleontology", "Astronomy", "Astrophysics", "Cosmology", "Planetary Science",
+    "Anthropology", "Archaeology", "Criminology", "Economics", "Geography", "History",
+    "Linguistics", "Philosophy", "Political Science", "Psychology", "Sociology", "Statistics",
+    "Accounting", "Finance", "Human Resources", "Management", "Marketing", "Operations",
+    "Supply Chain", "Information Systems", "International Business", "Organizational Behavior", "Strategy",
+    "Tourism", "Hospitality", "Event Management", "Recreation", "Leisure", "Sports Management",
+    "Food Service", "Culinary Arts", "Baking", "Pastry Arts", "Catering", "Food Safety",
+    "Nutrition", "Dietetics", "Food Science", "Agriculture", "Horticulture", "Animal Science",
+    "Veterinary Medicine", "Pharmacy", "Pharmacology", "Toxicology", "Medicine", "Surgery",
+    "Nursing", "Dentistry", "Optometry", "Podiatry", "Veterinary Nursing", "Animal Health",
+    "Environmental Health", "Public Health", "Health Education", "Health Promotion", "Healthcare Management",
+    "Health Informatics", "Health IT", "Medical Imaging", "Medical Laboratory", "Medical Technology",
+    "Occupational Therapy", "Physical Therapy", "Speech Therapy", "Rehabilitation", "Orthotics",
+    "Prosthetics", "Audiology", "Speech Pathology", "Language Pathology", "Hearing Science",
+    "Vision Science", "Optics", "Ophthalmology", "Orthoptics", "Visual Science", "Neuroscience",
+    "Neurology", "Neurosurgery", "Psychiatry", "Psychology", "Counseling", "Social Work",
+    "Education", "Teaching", "Learning", "Instructional Design", "Curriculum Development", "Educational Technology",
+    "Special Education", "Early Childhood Education", "Elementary Education", "Secondary Education", "Higher Education",
+    "Adult Education", "Continuing Education", "Distance Learning", "Online Learning", "Blended Learning",
+    "Flipped Classroom", "Personalized Learning", "Competency-Based Education", "Project-Based Learning", "Experiential Learning",
+    "Service Learning", "Community Engagement", "Volunteerism", "Civic Engagement", "Social Responsibility",
+    "Sustainability", "Environmental Sustainability", "Social Sustainability", "Economic Sustainability", "Cultural Sustainability",
     "Cooking", "Gaming", "Education", "Shopping", "Networking", "Wellness"
   ];
 
@@ -152,7 +220,6 @@ export function PitchDeckGameComponent() {
   const [playerNames, setPlayerNames] = useState<string[]>([]);
   const [numPlayers, setNumPlayers] = useState<number>(4); // Default to 4
   const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
-  const [showRules, setShowRules] = useState<boolean>(true); // State to toggle rules visibility
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0); // Track current player
 
   useEffect(() => {
@@ -261,32 +328,9 @@ export function PitchDeckGameComponent() {
     }
   }
 
-  const handleStartGame = () => {
-    setShowRules(false); // Hide rules when starting the game
-  }
-
   return (
     <div className="max-w-4xl mx-auto p-4">
-      {showRules ? (
-        <Card className="mb-4 mx-auto">
-          <CardHeader>
-            <CardTitle>Game Rules</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ol className="list-decimal pl-5">
-              <li>Play this game with 4-6 friends</li>
-              <li>Key in the number of players and input everyone's name</li>
-              <li>Start the game!</li>
-              <li>The first player draws 5 cards - 1 Theme Card, 1 Prompt Card, and 3 Content Cards.</li>
-              <li>The player has 1 minute to do a mini pitch based on the cards they have.</li>
-              <li>Once the time is up, they can pass it to the next player and the game repeats from step 4 to step 5.</li>
-            </ol>
-          </CardContent>
-          <CardFooter>
-            <Button onClick={handleStartGame} className="w-full">Enter Game</Button>
-          </CardFooter>
-        </Card>
-      ) : (
+      {!isGameStarted ? (
         <Card className="mb-4 mx-auto">
           <CardHeader>
             <CardTitle>Fluff or Stuff Game</CardTitle>
@@ -324,6 +368,62 @@ export function PitchDeckGameComponent() {
               <Button type="submit" className="w-full mt-4">Start Game</Button> {/* Full width button with margin-top */}
             </form>
           </CardContent>
+        </Card>
+      ) : (
+        <Card className="mb-4">
+          <CardHeader>
+            <CardTitle>Fluff or Stuff Game</CardTitle>
+            <CardDescription>Draw cards to create your winning presentation!</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="mb-4">
+              <h3 className="font-bold">Current Player: {playerNames[currentPlayerIndex]}</h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"> {/* Responsive grid */}
+              {hand.map((card, index) => (
+                <Card key={index} className={`${getCardColor(card.type)} border-2`}>
+                  <CardHeader>
+                    <CardTitle className="text-sm">{card.type}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{card.content}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <div className="bg-muted p-4 rounded-lg mb-4">
+              <h3 className="font-bold mb-2">Your Pitch:</h3>
+              <p>{renderPitch()}</p>
+            </div>
+            <div className="flex items-center justify-between bg-primary/10 p-4 rounded-lg">
+              <div className="text-2xl font-bold">
+                {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
+              </div>
+              <div>
+                <Button onClick={toggleTimer} className="mr-2">
+                  {isTimerRunning ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                </Button>
+                <Button onClick={resetTimer} variant="outline">
+                  <RotateCcw className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+          <CardFooter className="flex flex-col sm:flex-row justify-between"> {/* Responsive footer */}
+            <Button onClick={drawCard} disabled={isHandComplete() || remainingCards.length === 0} className="mb-2 sm:mb-0 sm:w-auto w-full">
+              Draw Card
+            </Button>
+            <Button onClick={resetGame} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full">
+              <Shuffle className="mr-2 h-4 w-4" />
+              Reset Game
+            </Button>
+            <Button onClick={nextPlayer} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full">
+              Next Player
+            </Button>
+            <Button onClick={goBackToSetup} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full">
+              Go Back
+            </Button>
+          </CardFooter>
         </Card>
       )}
     </div>
