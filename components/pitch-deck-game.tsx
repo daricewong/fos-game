@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Shuffle, Play, Pause, RotateCcw } from "lucide-react"
+import { motion } from 'framer-motion'
 
 type CardType = 'Content' | 'Prompt' | 'Theme'; // Updated card types
 
@@ -321,6 +322,10 @@ export function PitchDeckGameComponent() {
     // Reset the cards being drawn for the next player
     setHand([]);
 
+    // Reset the timer to 60 seconds
+    setTimer(60);
+    setIsTimerRunning(false);
+
     // Update the UI to reflect the next player's name
     const currentPlayerElement = document.querySelector('.current-player-name');
     if (currentPlayerElement) {
@@ -329,102 +334,121 @@ export function PitchDeckGameComponent() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="max-w-4xl mx-auto p-4 bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen">
       {!isGameStarted ? (
-        <Card className="mb-4 mx-auto">
-          <CardHeader>
-            <CardTitle>Fluff or Stuff Game</CardTitle>
-            <CardDescription>Enter Player Names to Start the Game!</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handlePlayerNamesSubmit} className="mb-4">
-              <div className="mb-2 flex items-center"> {/* Flex container for alignment */}
-                <label className="w-1/3"> {/* Set a width for the label */}
-                  Number of Players:
-                </label>
-                <select
-                  value={numPlayers}
-                  onChange={(e) => setNumPlayers(Number(e.target.value))}
-                  className="ml-2 border rounded p-1 w-full" // Make dropdown full width
-                >
-                  <option value={4}>4</option>
-                  <option value={5}>5</option>
-                  <option value={6}>6</option>
-                </select>
-              </div>
-              {Array.from({ length: numPlayers }).map((_, index) => (
-                <div key={index} className="mb-2 flex items-center"> {/* Added flex for alignment */}
-                  <label className="w-1/3"> {/* Set a width for the label */}
-                    Player {index + 1} Name:
-                  </label>
-                  <input
-                    type="text"
-                    id={`player-${index}`}
-                    className="ml-2 border rounded p-1 w-full" // Make input full width
-                    required
-                  />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Card className="mb-4 mx-auto shadow-lg max-w-md">
+            <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+              <CardTitle className="text-3xl font-bold">Fluff or Stuff Game</CardTitle>
+              <CardDescription className="text-gray-100">Enter Player Names to Start the Game!</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <form onSubmit={handlePlayerNamesSubmit} className="space-y-4">
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Number of Players:</label>
+                  <select
+                    value={numPlayers}
+                    onChange={(e) => setNumPlayers(Number(e.target.value))}
+                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
+                    <option value={6}>6</option>
+                  </select>
                 </div>
-              ))}
-              <Button type="submit" className="w-full mt-4">Start Game</Button> {/* Full width button with margin-top */}
-            </form>
-          </CardContent>
-        </Card>
+                {Array.from({ length: numPlayers }).map((_, index) => (
+                  <div key={index} className="mb-4">
+                    <label htmlFor={`player-${index}`} className="block text-sm font-medium text-gray-700 mb-1">
+                      Player {index + 1} Name:
+                    </label>
+                    <input
+                      type="text"
+                      id={`player-${index}`}
+                      className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                ))}
+                <Button type="submit" className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 rounded-md hover:from-blue-600 hover:to-purple-600 transition duration-300">
+                  Start Game
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </motion.div>
       ) : (
-        <Card className="mb-4">
-          <CardHeader>
-            <CardTitle>Fluff or Stuff Game</CardTitle>
-            <CardDescription>Draw cards to create your winning presentation!</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-4">
-              <h3 className="font-bold">Current Player: {playerNames[currentPlayerIndex]}</h3>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4"> {/* Responsive grid */}
-              {hand.map((card, index) => (
-                <Card key={index} className={`${getCardColor(card.type)} border-2`}>
-                  <CardHeader>
-                    <CardTitle className="text-sm">{card.type}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{card.content}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-            <div className="bg-muted p-4 rounded-lg mb-4">
-              <h3 className="font-bold mb-2">Your Pitch:</h3>
-              <p>{renderPitch()}</p>
-            </div>
-            <div className="flex items-center justify-between bg-primary/10 p-4 rounded-lg">
-              <div className="text-2xl font-bold">
-                {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Card className="mb-4 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+              <CardTitle className="text-3xl font-bold">Fluff or Stuff Game</CardTitle>
+              <CardDescription className="text-gray-100">Draw cards to create your winning presentation!</CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="mb-4">
+                <h3 className="font-bold text-xl text-blue-700">Current Player: <span className="text-purple-600">{playerNames[currentPlayerIndex]}</span></h3>
               </div>
-              <div>
-                <Button onClick={toggleTimer} className="mr-2">
-                  {isTimerRunning ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                </Button>
-                <Button onClick={resetTimer} variant="outline">
-                  <RotateCcw className="h-4 w-4" />
-                </Button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                {hand.map((card, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                  >
+                    <Card className={`${getCardColor(card.type)} border-2 shadow-md hover:shadow-lg transition-shadow duration-300`}>
+                      <CardHeader>
+                        <CardTitle className="text-sm font-semibold">{card.type}</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-lg">{card.content}</p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
               </div>
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col sm:flex-row justify-between"> {/* Responsive footer */}
-            <Button onClick={drawCard} disabled={isHandComplete() || remainingCards.length === 0} className="mb-2 sm:mb-0 sm:w-auto w-full">
-              Draw Card
-            </Button>
-            <Button onClick={resetGame} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full">
-              <Shuffle className="mr-2 h-4 w-4" />
-              Reset Game
-            </Button>
-            <Button onClick={nextPlayer} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full">
-              Next Player
-            </Button>
-            <Button onClick={goBackToSetup} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full">
-              Go Back
-            </Button>
-          </CardFooter>
-        </Card>
+              <div className="bg-white p-6 rounded-lg mb-6 shadow-inner">
+                <h3 className="font-bold mb-2 text-xl text-blue-700">Your Pitch:</h3>
+                <p className="text-lg italic text-gray-700">{renderPitch()}</p>
+              </div>
+              <div className="flex items-center justify-between bg-gradient-to-r from-blue-100 to-purple-100 p-6 rounded-lg shadow-inner">
+                <div className="text-3xl font-bold text-blue-700">
+                  {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}
+                </div>
+                <div>
+                  <Button onClick={toggleTimer} className="mr-2 bg-blue-500 hover:bg-blue-600">
+                    {isTimerRunning ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                  </Button>
+                  <Button onClick={resetTimer} variant="outline" className="border-blue-500 text-blue-500 hover:bg-blue-50">
+                    <RotateCcw className="h-5 w-5" />
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+            <CardFooter className="flex flex-col sm:flex-row justify-between p-6 bg-gray-50">
+              <Button onClick={drawCard} disabled={isHandComplete() || remainingCards.length === 0} className="mb-2 sm:mb-0 sm:w-auto w-full bg-purple-500 hover:bg-purple-600">
+                Draw Card
+              </Button>
+              <Button onClick={resetGame} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full border-purple-500 text-purple-500 hover:bg-purple-50">
+                <Shuffle className="mr-2 h-4 w-4" />
+                Reset Game
+              </Button>
+              <Button onClick={nextPlayer} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full border-blue-500 text-blue-500 hover:bg-blue-50">
+                Next Player
+              </Button>
+              <Button onClick={goBackToSetup} variant="outline" className="mb-2 sm:mb-0 sm:w-auto w-full border-gray-500 text-gray-500 hover:bg-gray-50">
+                Go Back
+              </Button>
+            </CardFooter>
+          </Card>
+        </motion.div>
       )}
     </div>
   )
